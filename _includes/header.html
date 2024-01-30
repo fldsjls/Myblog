@@ -4,13 +4,8 @@
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     
-    <!-- {%- assign titles = site.pages | map: 'title' -%}
-    {% for title in titles %}
-      {{ title }}
-    {% endfor %} 此处为进行代码检查-->
-    
     {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>  <!-- 这里的relative_url是jekyll内置的liquid过滤器，用于添加baseurl的值 -->
 
     {%- if titles_size > 0 -%}
       <nav class="site-nav">
