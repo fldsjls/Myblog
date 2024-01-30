@@ -46,7 +46,7 @@
 					)
                 }
             }
-            w.splice(w.indexOf(i), 1); //删除w数组中i的位置
+            w.splice(w.indexOf(i), 1); //删除w数组中i的位置,这样i元素和x元素的连线就不会重复，且不会删除f元素
         });  //只有在括号语句结束时，才可以用分号
 		m(b);  //b是function b()
     }
