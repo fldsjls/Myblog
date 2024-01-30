@@ -28,16 +28,11 @@
             for (v = 0; v < w.length; v++) {
                 x = w[v];
                 if (i !== x && null !== x.x && null !== x.y) {  //这里的i是数组t中的元素，x是数组w中的元素，这段当鼠标移出时，不执行w中的首个元素
-                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;  //根据直角三角形得到y是直线距离的平方，这个距离是前后两个元素的比较，将通过双循环对每个i进行
-                    y < x.max && (
-                        x === f && y >= x.max / 2 && (
-                            i.x -= 0.03 * B, i.y -= 0.03 * z  //当循环为v=0且f不为空时，对i点施加反向量
-                            );  //对于鼠标移入时，内循环只比较一次
-                        A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke() //这段代码是对javascript真值的利用，就省略了if语句；当鼠标移入时，给点一个反向移动，让始终在鼠标位置和生成点位置连线
-                    );  
+                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;  //根据直角三角形得到y是直线距离的平方
+                    y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z),A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke());  //这段代码是对javascript真值的利用，就省略了if语句；当鼠标移入时，给点一个反向移动
                 }
             }
-            w.splice(w.indexOf(i), 1);  //删除w数组中i的位置，由于i元素不会是f，所以每次都可以对鼠标所在点循环，但不会对其他重复点连线
+            w.splice(w.indexOf(i), 1);  //删除w数组中i的位置
         })
         m(b);
     }
