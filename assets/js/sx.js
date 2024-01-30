@@ -18,30 +18,45 @@
     }
 
     function b() {
-        e.clearRect(0, 0, r, n); //先清楚画布
+        e.clearRect(0, 0, r, n);  //先清除画布
         var w = [f].concat(t);  //[f]直接用f创建了一个数组，并和数组t合并，w数组的首个元素就是鼠标状态
         var x, v, A, B, z, y;
         t.forEach(function (i) {
-            i.x += i.xa; i.y += i.ya;  //更新i.x和i.y
-            i.xa *= i.x > r || i.x < 0 ? -1 : 1; i.ya *= i.y > n || i.y < 0 ? -1 : 1;  //更新i.xa和i.ya，数学上是加速度。如果点的位置超过了边界
-            e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);  //在i.x和i.y的位置画一个1和1像素的矩形，并且是从左上角开始，这样矩形的中心就是点的原始位置
+            i.x += i.xa, i.y += i.ya;  //更新i.x和i.y,为其赋予一个初始移动
+			i.xa *= i.x > r || i.x < 0 ? -1 : 1;  //如果超过画布，就将初始移动变成负，使其反弹
+			i.ya *= i.y > n || i.y < 0 ? -1 : 1;  //如果超过画布，就将初始移动变成负，使其反弹
+			e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);  //在i.x和i.y的位置画一个1和1像素的矩形，并且是从左上角开始，这样矩形的中心就是点的原始位置
             for (v = 0; v < w.length; v++) {
                 x = w[v];
-                if (i !== x && null !== x.x && null !== x.y) {  //这里的i是数组t中的元素，x是数组w中的元素，这段当鼠标移出时，不执行w中的首个元素
-                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;  //根据直角三角形得到y是直线距离的平方
-                    y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z),A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke());  //这段代码是对javascript真值的利用，就省略了if语句；当鼠标移入时，给点一个反向移动
+                if (i !== x && null !== x.x && null !== x.y) {  //这里的i是数组t中的元素，x是数组w中的元素，当f中含有空值时，就跳过，即鼠标移出，不执行首次
+                    B = i.x - x.x;
+					z = i.y - x.y;
+					y = B * B + z * z; //根据直角三角形定理得到y是直线距离的平方
+                    y < x.max && (  //以下部分都不可以使用";"分隔,因为其本质是一个&&语句,且并不考虑返回，而只考虑操作
+						x === f && y >= x.max / 2 && (  //使用&&作为条件判断，和javascript的真值形式有关
+							i.x -= 0.03 * B, i.y -= 0.03 * z  //当鼠标移入时，就在一定范围内给其一个反向量，抵消之前的正向量，使其粘合
+						),  //这部分为false不会影响到下一部分，因为他们是在括号内，而不是用&&连接
+                        A = (x.max - y) / x.max,  
+                        e.beginPath(),
+                        e.lineWidth = A / 2,
+                        e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")",
+                        e.moveTo(i.x, i.y),
+                        e.lineTo(x.x, x.y),
+                        e.stroke()
+					)
                 }
             }
-            w.splice(w.indexOf(i), 1);  //删除w数组中i的位置
-        })
-        m(b);
+            w.splice(w.indexOf(i), 1); //删除w数组中i的位置
+        });  //只有在括号语句结束时，才可以用分号
+		m(b);  //b是function b()
     }
 
-    var u = document.createElement("canvas"); s = l(); c = "c_n" + s.l; e = u.getContext("2d"); r; n;   //其中定义的u、s、c、e、r、n都是全局变量，e的作用是创建画布
+    var u = document.createElement("canvas"), s = l(), c = "c_n" + s.l, e = u.getContext("2d"), r, n;   //其中定义的u、s、c、e、r、n都是全局变量，e的作用是创建画布
     m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {window.setTimeout(i, 1000 / 45)}; //匿名函数。有一个参数i，执行代码块setTimeout
     a = Math.random; f = {x: null, y: null, max: 20000};  //定义a、f,其中a只是赋予了一个方法，而不是一个值,他们都是全局变量
-    u.id = c;
-    u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
+    
+    u.id = c;  //为u标签添加属性
+    u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o; //为u标签添加属性，其中style是基本属性，cssText是内联样式，这里用来赋值，即设置Css属性
 
     j("body")[0].appendChild(u);
     k();
