@@ -64,17 +64,19 @@
     window.onresize = k;  //这里的k是作为function的k(),事件的赋值是有区别的，不能加()否则会直接调用
     window.onmousemove = function (i) {  //执行一个匿名函数，而不是直接执行初始函数，这个匿名函数会产生一个全局变量的i，不同于上面的i
         i = i || event || window.event;
-        f.x = i.clientX; f.y = i.clientY;
+        f.x = i.clientX; 
+        f.y = i.clientY;
     }
     window.onmouseout = function () {  //当鼠标移出时，初始化f对象
-        f.x = null; f.y = null;
+        f.x = null; 
+        f.y = null;
     }
 
     var t = [] //数组t中储存了随机生成的点
     for (p = 0; s.n > p; p++) { //s.n的值是400默认
         var h = a() * r, g = a() * n, q = 2 * a() - 1, d = 2 * a() - 1;
-        t.push({x: h, y: g, xa: q, ya: d, max: 6000});  //向t中添加一个对象，其中有x、y、xa、ya、max五个属性
+        t.push({x: h, y: g, xa: q, ya: d, max: 6000});  //向t中添加对象，其有x、y、xa、ya、max五个属性
     }
     
-    setTimeout(function () {b()}, 100)  //以上是一个匿名函数，函数内容是函数b()
+    setTimeout(function () {b()}, 100);  //以上是一个匿名函数，函数内容是函数b()
 }();
