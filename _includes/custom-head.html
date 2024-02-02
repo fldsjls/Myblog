@@ -3,10 +3,11 @@
 
   1. Head over to https://realfavicongenerator.net/ to add your own favicons.
   2. Customize default _includes/custom-head.html in your source directory and insert the given code snippet.
+  3.定义链接,必须要使用href="{{ "/assets/css/style.css" | relative_url }}"这样子的格式,才能省略baseurl
 {% endcomment %}
 
 {% comment %} 网站兼容性脚本Modernizr {% endcomment %}
-<script src="/assets/js/modernizr.custom.js"></script>
+<script src="{{"/assets/js/modernizr.custom.js" | relative_url }}"></script>
 
-{% comment %} 下拉菜单的css样式 {% endcomment %
-<link rel="stylesheet" type="text/css" href="/assets/css/component.css" />
+{% comment %} 下拉菜单的css样式 {% endcomment %}
+<link rel="stylesheet" type="text/css" href="{{"/assets/css/component.css" | relative_url }}" />
