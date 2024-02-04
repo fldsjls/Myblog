@@ -21,7 +21,7 @@
 	perspective: 1000px;
 	-webkit-perspective-origin: 50% 200%;
 	perspective-origin: 50% 200%;
-	margin-left: 0px;  /* */
+	margin-left: calc(auto + 30px);  /* */
 	line-height: 0px;  /* */
 }
 
