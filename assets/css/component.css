@@ -13,8 +13,8 @@
 
 .dl-menuwrapper {
 	width: 100%;
-	max-width: 48px;
-	float: right;
+	max-width: 200px;
+	float: left;
 	position: relative;
 	left:0px;
 	-webkit-perspective: 1000px;
