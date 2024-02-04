@@ -16,17 +16,18 @@
 	max-width: 200px;
 	float: left;
 	position: relative;
-	left:0px;
+	left:0px;  /* */
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
 	-webkit-perspective-origin: 50% 200%;
 	perspective-origin: 50% 200%;
-	margin-left: 0px;
+	margin-left: 0px;  /* */
+	line-height: 0px;  /* */
 }
 
 .dl-menuwrapper:first-child {
 	margin-right: 0px;
-	margin-left: 0px;
+	margin-left: 0px;  /* */
 }
 
 .dl-menuwrapper button {
