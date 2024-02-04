@@ -58,6 +58,7 @@
     u.id = c;  //为u标签添加属性
     u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o; //为u标签添加属性，其中style是基本属性，cssText是内联样式，这里用来赋值，即设置Css属性
 
+    var text = j("body")[0]
     j("body")[0].appendChild(u);
     k();
 
