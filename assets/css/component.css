@@ -13,15 +13,15 @@
 
 .dl-menuwrapper {
 	width: 100%;
-	max-width: 300px;
+	max-width: 48px;
 	float: right;
 	position: relative;
-	left:100px;
+	left:0px;
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
 	-webkit-perspective-origin: 50% 200%;
 	perspective-origin: 50% 200%;
-	margin-left: 100px;
+	margin-left: 0px;
 }
 
 .dl-menuwrapper:first-child {
